@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
 function ActivityHistory() {
     const [activities, setActivities] = useState([]);
 
     useEffect(() => {
         const fetchActivities = async () => {
-            const db = firebase.firestore();
-            const snapshot = await db.collection("activities").get();
+            const db = getFirestore();
+            const snapshot = await getDocs(collection(db, "activities"));
             setActivities(snapshot.docs.map(doc => doc.data()));
         };
         fetchActivities();

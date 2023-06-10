@@ -1,3 +1,4 @@
+import React from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
@@ -13,7 +14,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-
 const provider = new GoogleAuthProvider();
 
 const signInWithGoogle = () => {
@@ -33,4 +33,11 @@ const signInWithGoogle = () => {
     });
 };
 
-export { auth, signInWithGoogle };
+const Auth = () => (
+    <div>
+        <button onClick={signInWithGoogle}>Sign in with Google</button>
+    </div>
+);
+
+export default Auth; // exporting Auth as default
+export { auth };
