@@ -1,32 +1,36 @@
-import React, { useState } from 'react';
-## import { initializeApp } from 'firebase/compat/app';
-import firebase from 'firebase/compat/app';
-import * as firebaseui from 'firebaseui';
-import 'firebaseui/dist/firebaseui.css';
-import 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
-function Auth() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+// Use the Firebase configuration from the .env file
+const firebaseConfig = {
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID
+};
 
-    const handleLogin = () => {
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .catch((error) => console.error('Error:', error));
-    };
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
 
-    const handleSignUp = () => {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-            .catch((error) => console.error('Error:', error));
-    };
+const provider = new GoogleAuthProvider();
 
-    return (
-        <div>
-            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button onClick={handleLogin}>Log in</button>
-            <button onClick={handleSignUp}>Sign up</button>
-        </div>
-    );
-}
+const signInWithGoogle = () => {
+    signInWithPopup(auth, provider).then((result) => {
+        // This gives you a Google Access Token.
+        const token = result.credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+    }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = error.credential;
+    });
+};
 
-export default Auth;
+export { auth, signInWithGoogle };
