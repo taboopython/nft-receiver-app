@@ -1,0 +1,39 @@
+{
+  "name": "nft-receiver-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "@polkadot/api": "^10.8.1",
+    "@polkadot/extension-dapp": "^0.46.4",
+    "firebase": "^9.22.2",
+    "firebaseui": "^6.0.2",
+    "qrcode-reader": "^1.0.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-qr-reader": "^3.0.0-beta-1",
+    "react-qr-scanner": "^1.0.0-alpha.11",
+    "react-scripts": "^5.0.1",
+    "web3": "^4.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
+}
