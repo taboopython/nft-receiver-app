@@ -8,9 +8,13 @@ function NFTReceiver() {
   const handleScan = async data => {
     if (data && !qrData) {
       setQrData(data);
-      // QRデータを用いてNFTデータを取得します
+      // QRデータからcontractAddressとtokenIdを抽出します。
+      // ここでは仮にQRデータが"contractAddress:tokenId"形式であると仮定しています。
+      const [contractAddress, tokenId] = data.split(':');
+      
+      // NFTデータを取得します
       try {
-        const response = await fetch(`YOUR_NFT_API_ENDPOINT?data=${data}`);
+        const response = await fetch(`http://localhost:3001/api/nft/${contractAddress}/${tokenId}`);
         const nftInfo = await response.json();
         setNftData(nftInfo);
       } catch (err) {
